@@ -117,14 +117,11 @@ end
 
 desc "Check Java version"
 task :java do
-  version = `java -version 2>&1`.split("\n").first
-  unless  version =~ /java version "1\.(6|7)/
-    puts "You need to configure your environment for Java 1.6 (found #{version.inspect})."
+  unless `java -version 2>&1`.split("\n").first =~ /java version "1.6/ #"
+    puts "You need to configure your environment for Java 1.6."
     puts "If you're on OS X, just export the following environment variables:"
     puts '  JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home"'
     puts '  PATH="/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home/bin:$PATH"'
-    puts
-
     exit(1)
   end
 end

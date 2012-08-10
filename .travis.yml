@@ -1,8 +1,6 @@
 language: ruby
 rvm:
   - 1.9.3
-jdk:
-  - openjdk6
 env:
   - CASSANDRA_VERSION=0.6
   - CASSANDRA_VERSION=0.7

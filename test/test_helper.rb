@@ -6,9 +6,9 @@ begin; require 'ruby-debug'; rescue LoadError; end
 
 begin
   @test_client = Cassandra.new('Twitter', 'localhost:9160', :thrift_client_options => {
-    :retries         => 3,
+    :retries         => 5,
     :timeout         => 5,
-    :connect_timeout => 1
+    :connect_timeout => 5
   })
 rescue Thrift::TransportException => e
   #FIXME Make server automatically start if not running

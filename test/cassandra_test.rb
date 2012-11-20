@@ -7,17 +7,24 @@ class CassandraTest < Test::Unit::TestCase
     assert_equal Set.new(keys), Set.new(hash.keys)
   end
 
+
   def setup
-    @twitter = Cassandra.new('Twitter', "127.0.0.1:9160", :retries => 2, :connect_timeout => 1, :timeout => 5, :exception_classes => [])
+    test_client_options = {
+      :retries         => 3,
+      :timeout         => 5,
+      :connect_timeout => 2
+    }
+
+    @twitter = Cassandra.new('Twitter', "127.0.0.1:9160", test_client_options)
     @twitter.clear_keyspace!
 
-    @blogs = Cassandra.new('Multiblog', "127.0.0.1:9160", :retries => 2, :connect_timeout => 1, :timeout => 5, :exception_classes => [])
+    @blogs = Cassandra.new('Multiblog', "127.0.0.1:9160", test_client_options)
     @blogs.clear_keyspace!
 
-    @blogs_long = Cassandra.new('MultiblogLong', "127.0.0.1:9160", :retries => 2, :connect_timeout => 1, :timeout => 5, :exception_classes => [])
+    @blogs_long = Cassandra.new('MultiblogLong', "127.0.0.1:9160", test_client_options)
     @blogs_long.clear_keyspace!
 
-    @type_conversions = Cassandra.new('TypeConversions', "127.0.0.1:9160", :retries => 2, :connect_timeout => 1, :timeout => 5, :exception_classes => [])
+    @type_conversions = Cassandra.new('TypeConversions', "127.0.0.1:9160", test_client_options)
     @type_conversions.clear_keyspace!
 
     Cassandra::WRITE_DEFAULTS[:consistency] = Cassandra::Consistency::ONE

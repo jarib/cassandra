@@ -10,9 +10,10 @@ class CassandraTest < Test::Unit::TestCase
 
   def setup
     test_client_options = {
-      :retries         => 3,
-      :timeout         => 5,
-      :connect_timeout => 2
+      :retries           => 3,
+      :timeout           => 5,
+      :connect_timeout   => 2,
+      :exception_classes => []
     }
 
     @twitter = Cassandra.new('Twitter', "127.0.0.1:9160", test_client_options)

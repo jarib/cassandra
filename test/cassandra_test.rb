@@ -7,13 +7,12 @@ class CassandraTest < Test::Unit::TestCase
     assert_equal Set.new(keys), Set.new(hash.keys)
   end
 
-
   def setup
     test_client_options = {
       :retries           => 3,
       :timeout           => 5,
       :connect_timeout   => 2,
-      :exception_classes => []
+      :exception_class_overrides => [ThriftClient::NoServersAvailable] # let this bubble
     }
 
     @twitter = Cassandra.new('Twitter', "127.0.0.1:9160", test_client_options)

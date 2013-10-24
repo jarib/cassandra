@@ -12,6 +12,6 @@ env:
   - CASSANDRA_VERSION=0.7 JDK6=true
   - CASSANDRA_VERSION=0.6 JDK6=true
 before_script:
-  - '[[ -n $JDK6 ]] && jdk_switcher use openjdk6'
+  - bash -c '[[ -n $JDK6 ]] && jdk_switcher use openjdk6'
   - java -version
   - bundle exec rake 'cassandra:start[daemonize]'
